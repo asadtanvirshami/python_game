@@ -8,12 +8,17 @@ def get_choices():
   return choices
 
 def check_win(player,computer):
-    print(f"You Chose {player} ,Computer Chose {computer}")
+    value = isinstance(player,str)
+    if value == True:
+      print(f"You Chose {player} ,Computer Chose {computer}")
     if player == computer:
         return "It's a tie"
     elif player == "rock":
       if computer == "sicssors":
         return "You win!"
+    elif player == "rock":
+      if computer == "papers":
+        return "tied!"
     elif player == "sicssors":
       if computer == "papers":
         return "You win!"
