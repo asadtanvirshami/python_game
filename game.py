@@ -8,8 +8,8 @@ def get_choices():
   return choices
 
 def check_win(player,computer):
-    value = isinstance(player,str)
-    if value == True:
+    valueType = isinstance(player,str)
+    if valueType == True:
       print(f"You Chose {player} ,Computer Chose {computer}")
     if player == computer:
         return "It's a tie"
