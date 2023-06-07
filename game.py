@@ -1,4 +1,10 @@
 import random
+from enum import Enum
+
+
+class State(Enum):
+  active = 1
+  inactive = 2
 
 def get_choices():
   player_choice = input("Enter choice for rock paper sicssor: ")
@@ -28,3 +34,4 @@ def check_win(player,computer):
 choices= get_choices()
 result = check_win(choices["player"], choices["computer"])
 print(result)
+print(State.active.value)
