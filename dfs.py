@@ -6,7 +6,7 @@ def createDictionary():
         if start in graph:
             for neighbor in graph[start]:
                 if neighbor not in graph:
-                    dfs(graph, start, visited)
+                    dfs(graph, neighbor, visited)
                     
     graph = {}
     num_items = int(input("Enter the number of items: "))
