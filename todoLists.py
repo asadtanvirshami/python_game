@@ -1,53 +1,49 @@
-#importing tkinter package for the GUI
-from  tkinter import * 
-import tkinter.messagebox
+import tkinter as tk
+from tkinter import messagebox
 
-#setting up the window
-window=Tk()
+# Function to add a task
+def add_task():
+    task = entry.get()
+    if task:
+        listbox.insert(tk.END, task)
+        entry.delete(0, tk.END)
+    else:
+        messagebox.showwarning("Empty Task", "Please enter a task.")
 
-#title of the window
-window.title("Python App Todo List")
+# Function to remove a task
+def remove_task():
+    try:
+        index = listbox.curselection()
+        listbox.delete(index)
+    except:
+        messagebox.showwarning("No Task Selected", "Please select a task to remove.")
 
-#Frame widget to hold the listbox and the scrollbar
-frame_task = Frame(window)
-frame_task.pack()
+# Create the main window
+window = tk.Tk()
+window.title("To-Do List")
 
-#to hold items in a listbox
-listbox_task = Listbox(frame_task, bg="black", fg="white", height=15, width=50, font="Helvetcia")
-listbox_task.pack(side = tkinter.LEFT) 
+# Create a listbox to display tasks
+listbox = tk.Listbox(window, width=50, height=10)
+listbox.pack(pady=10)
 
-#Scrolldown in case the total list exceeds the size of the given window 
-scrollbar_task = Scrollbar(frame_task)
-scrollbar_task.pack(side = tkinter.RIGHT, fill = tkinter.Y)
-listbox_task.config(yscrollcommand=scrollbar_task.set)
-scrollbar_task.config(command=listbox_task.yview)
+# Create a scrollbar for the listbox
+scrollbar = tk.Scrollbar(window)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-#Enter Button Widget
-entry_button = Button(window, text="Add Task", width=50)
-entry_button.pack(pady=3)
+# Connect the listbox with the scrollbar
+listbox.config(yscrollcommand=scrollbar.set)
+scrollbar.config(command=listbox.yview)
 
-#Delete Button Widget
-delete_button = Button(window, text="Delete Task", width=50)
-delete_button.pack(pady=3)
+# Create an entry field to add tasks
+entry = tk.Entry(window, width=50)
+entry.pack(pady=5)
 
-#Complete Button Widget
-mark_button=Button(window,text="Mark as completed ",width=50,)
-mark_button.pack(pady=3)
+# Create buttons to add and remove tasks
+add_button = tk.Button(window, text="Add Task", command=add_task)
+add_button.pack(pady=5)
 
+remove_button = tk.Button(window, text="Remove Task", command=remove_task)
+remove_button.pack(pady=5)
+
+# Run the main window loop
 window.mainloop()
-
-def enterTask():
-    task = ""
-    def add():
-        task = task_entry.get(1.0, "end-1c")
-        if task == "":
-            tkinter.messagebox.showwarning(title="Warning", message="Please enter the task")
-        else:
-            listbox_task.insert(END,task)
-            root1.destroy()
-    root1 = Tk()
-    root1.title("Add Task")
-    task_entry = Text(root1, width=40, height=4)
-    task_entry.pack()
-    button_temp=Button(root1,text="Add task",command=add)
-    button_temp.pack()
